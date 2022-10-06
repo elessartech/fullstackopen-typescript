@@ -22,12 +22,12 @@ const calculateRating = (periodLength: number, trainingDays: number): {rating: n
 const calculateExercises = (dailyExerciseHours: Array<number>, targetHourAmount: number): Result => {
     const periodLength =  dailyExerciseHours.length
     const trainingDays = dailyExerciseHours.filter(exerciseDay => exerciseDay > 0).length
-    const success = trainingDays > targetHourAmount
     const calculatedRating = calculateRating(periodLength, trainingDays)
     const rating = calculatedRating.rating
     const ratingDescription = calculatedRating.descr
     const target = targetHourAmount
     const average =  dailyExerciseHours.reduce((partialSum, a) => partialSum + a, 0) / periodLength
+    const success = average >= targetHourAmount
     return {
         periodLength,
         trainingDays,
@@ -39,4 +39,7 @@ const calculateExercises = (dailyExerciseHours: Array<number>, targetHourAmount:
     }
 }
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2))
+const targetHourAmount: number = Number(process.argv[2])
+const dailyExerciseHours: Array<number> = process.argv.slice(3).map(daylyExercise => Number(daylyExercise))
+
+console.log(calculateExercises(dailyExerciseHours, targetHourAmount))

@@ -6,6 +6,10 @@ const calculateBmi = (height: number, weight: number) => {
     else if (bmi >= 18.5 && bmi < 25) return 'Normal (healthy weight)'
     else if (bmi >= 25 && bmi < 30) return 'Overweight (Pre-obese)'
     else if (bmi >= 30) return 'Obese'
+    return ''
 }
 
-console.log(calculateBmi(180, 74))
+const height: number = Number(process.argv[2])
+const weight: number = Number(process.argv[3])
+
+console.log(calculateBmi(height, weight))
