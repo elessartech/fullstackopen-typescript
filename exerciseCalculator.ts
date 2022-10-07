@@ -43,3 +43,5 @@ const targetHourAmount = Number(process.argv[2]);
 const dailyExerciseHours: Array<number> = process.argv.slice(3).map(daylyExercise => Number(daylyExercise));
 
 console.log(calculateExercises(dailyExerciseHours, targetHourAmount));
+
+export {calculateExercises}
