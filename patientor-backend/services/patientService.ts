@@ -1,7 +1,9 @@
-import patientData from '../data/patients.json';
+import patientData from '../data/patients';
 import { v1 as uuid } from 'uuid'
 
 import { PatientEntry, NonSensitivePatientEntry, NewPatientEntry } from '../types'
+
+import { toNewPatientEntry } from '../utils'
 
 const getEntries = (): PatientEntry[] => {
     return patientData;
@@ -12,12 +14,10 @@ const getNonSensitivePatientEntry = (): NonSensitivePatientEntry[] => {
 };
 
 const addPatient = ( entry: NewPatientEntry ): PatientEntry => {
-    const newPatientEntry = {
-        id: uuid(),
-        ...entry
-      };
-      patientData.push(newPatientEntry);
-      return newPatientEntry;
+    const id = uuid()
+    const newPatientEntry = toNewPatientEntry(id, entry.name, entry.dateOfBirth, entry.ssn, entry.gender, entry.occupation);
+    patientData.push(newPatientEntry);
+    return newPatientEntry;
 };
 
 export default {
