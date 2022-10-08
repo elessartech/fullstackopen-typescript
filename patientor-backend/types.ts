@@ -11,6 +11,7 @@ export enum Gender {
 } 
 
 export interface Entry {
+    
 }
 
 export interface PatientEntry {

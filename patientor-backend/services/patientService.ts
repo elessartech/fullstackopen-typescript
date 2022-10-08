@@ -19,7 +19,7 @@ const getPatientEntry = (patientId: string): PatientEntry | undefined => {
 
 const addPatient = ( entry: NewPatientEntry ): PatientEntry => {
     const id = uuid()
-    const newPatientEntry = toNewPatientEntry(id, entry.name, entry.dateOfBirth, entry.ssn, entry.gender, entry.occupation);
+    const newPatientEntry = toNewPatientEntry(id, entry.name, entry.dateOfBirth, entry.ssn, entry.gender, entry.occupation, []);
     patientData.push(newPatientEntry);
     return newPatientEntry;
 };
