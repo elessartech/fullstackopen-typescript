@@ -1,10 +1,11 @@
-import { Box, Typography } from "@material-ui/core";
+import { Box, List, ListItem, Typography } from "@material-ui/core";
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { apiBaseUrl } from "../constants";
 import { setPatientInfo, useStateValue } from "../state";
 import { Patient } from "../types";
+
 
 const PatientInfoPage = () => {
     const { id } = useParams<{ id: string }>();
@@ -37,6 +38,23 @@ const PatientInfoPage = () => {
                 </Typography>
                 <Typography align="left">
                     {`occupation: ${patient["data"].occupation}`}
+                </Typography>
+            </Box>
+            <Box marginTop={'2em'}>
+                <Typography variant="h4">{'entries'}</Typography>
+                <Typography align="left" style={{ marginTop: "1em" }}>
+                    {patient["data"].entries.map(entry => {
+                        return (
+                            <Box>
+                            <Typography>{entry.date}</Typography>
+                            <Typography>{entry.description}</Typography>
+                            <List>
+                                {entry.diagnosisCodes ? entry.diagnosisCodes.map(code => <ListItem>{code}</ListItem>) : null}
+                            </List>
+                            <Typography>{`diagnosed by ${entry.specialist}`}</Typography>
+                        </Box>
+                        )
+                    })}
                 </Typography>
             </Box>
         </div>
