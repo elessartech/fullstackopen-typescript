@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { apiBaseUrl } from "../constants";
 import { setDiagnoses, setPatientInfo, useStateValue } from "../state";
 import { DiagnoseEntry, Patient } from "../types";
+import EntryDetails from './EntryDetails'
 
 
 const PatientInfoPage = () => {
@@ -58,23 +59,8 @@ const PatientInfoPage = () => {
                 <Typography variant="h4">{'entries'}</Typography>
                 <Typography align="left" style={{ marginTop: "1em" }}>
                     {patient["data"].entries.map(entry => {
-                        console.log(entry)
                         return (
-                            <Box margin={'2em'} border={'1px solid black'} borderRadius={'5px'} padding={'2em'}>
-                                <Typography>{entry.date}</Typography>
-                                <Typography>{entry.description}</Typography>
-                                <List>
-                                    {entry.diagnosisCodes ? entry.diagnosisCodes.map(code => {
-                                        const definedDiagnose = Object.values(diagnoses).find(diagnose => diagnose.code === code)?.name
-                                        return (
-                                            <ListItem>{`${code} ${definedDiagnose}`} </ListItem>
-                                        )
-                                        }
-                                    ) 
-                                    : null}
-                                </List>
-                                <Typography>{`diagnosed by ${entry.specialist}`}</Typography>
-                            </Box>
+                            <EntryDetails entry={entry} /> 
                         )
                     })}
                 </Typography>
