@@ -14,6 +14,18 @@ router.get('/:id', (req, res) => {
   res.json(patient);
 });
 
+router.post('/:id/entry', (req, res) => {
+  const patientId = req.params.id
+  const patient = patientService.getPatientEntry(patientId)
+  if (patient) {
+    const newEntry = { ...req.body }
+    const addedEntry = patientService.addEntryForPatient(newEntry, patient)
+    res.json(addedEntry);
+  } else {
+    res.sendStatus(404)
+  }
+});
+
 router.post('/', (req, res) => {
   try {
     const { name, dateOfBirth, ssn, gender, occupation } = req.body;

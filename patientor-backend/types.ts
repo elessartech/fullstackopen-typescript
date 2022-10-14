@@ -56,6 +56,8 @@ export type Entry =
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
 
+export type NewEntryToAdd = NewOccupationalHealthcareEntry | NewHospitalEntry | NewHealthCheckEntry
+
 export interface PatientEntry {
     id: string;
     name: string;
@@ -71,3 +73,11 @@ export type NonSensitivePatientEntry = Omit<PatientEntry, "ssn">;
 export type NewPatientEntry = Omit<PatientEntry, 'id'>
 
 export type PublicPatient = Omit<PatientEntry, 'ssn' | 'entries'>;
+
+export type NewEntry = Omit<Entry, 'id'>
+
+export type NewOccupationalHealthcareEntry = Omit<OccupationalHealthcareEntry, 'id'>
+
+export type NewHospitalEntry = Omit<HospitalEntry, 'id'>
+
+export type NewHealthCheckEntry = Omit<HealthCheckEntry, 'id'>
